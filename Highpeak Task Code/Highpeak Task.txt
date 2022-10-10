@@ -1,0 +1,47 @@
+import java.util.Arrays;
+import java.util.Scanner;
+
+public class Goodies {
+    // static method for minimum difference
+
+    static int manimumDiff(int array1[], int D, int P)
+    {
+        int res1 = Integer.MAX_VALUE;
+        Arrays.sort(array1);
+        for (int i=0; i<=D-P;i++)
+            res1 = Math.min(res1, array1[i+ P-1] - array1[i]);
+        return res1;
+    }
+    //static method for find element
+    static int sarchele(int res,int array[],int D,int P)
+    {
+        int result = Integer.MAX_VALUE;
+        for(int i=0; i<=D; i++)
+        {
+            result = Math.min(result, array[i+ P-1]-array[i]);
+            if (res==result)
+                return i;
+        }
+        return 0;
+    }
+    // main method
+    public static void main(String[] args) {
+         //Priceses of goodies in array 
+        int priceArray[]={7980,22349,999,2799,229900,11101,9999,2195,9800,4999};
+        // string array
+        String collection[]={ "MI Band: 999","Sandwich Toaster: 2195" ,"Cult Pass: 2799","Scale: 4999","Fitbit Plus: 7980","Microwave Oven: 9800"  ,"Alexa: 9999","Digital Camera: 11101", "IPods: 22349","Macbook Pro: 229900" };
+        int D=priceArray.length;
+        System.out.println("Enter the number of employees");
+        //input from user 
+        Scanner s = new Scanner(System.in);
+        int P=s.nextInt();
+        int result=manimumDiff(priceArray,D,P);
+        System.out.println("Number of the employees:"+P);
+        int startindex=sarchele(result,priceArray,D,P);
+        System.out.println("Here the goodies that are selected for distribution are:");
+        for(int i=startindex;i<startindex+P;i++)
+            System.out.println(collection[i]);
+        System.out.println("\n");
+        System.out.println("And the difference between the chosen goodies with highest price and the lowest price is:"+result);
+    }
+}
